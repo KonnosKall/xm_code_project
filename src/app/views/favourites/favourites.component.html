@@ -1,0 +1,7 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4 single-image" *ngFor="let image of images; let i = index;">
+            <img class="img-fluid" (click)="view(image)" [src]="image">
+        </div>
+    </div>
+</div>
