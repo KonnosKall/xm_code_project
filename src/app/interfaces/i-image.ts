@@ -1,4 +1,4 @@
-export interface IImage {
+export interface IPicsumImage {
     author: string,
     download_url: string,
     height: number,
@@ -6,3 +6,4 @@ export interface IImage {
     url: string,
     width: number
 }
+

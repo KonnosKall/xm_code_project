@@ -3,12 +3,11 @@
     <infinite-scroll (scrolled)="onScroll($event)">
         <div class="col-4 single-image" *ngFor="let image of images; let i = index; trackBy: trackByFn">
             <div class="box-wrapper" (click)="addToFavourites(image)">
-                <img class="img-fluid" [src]="image">
+                <img class="img-fluid" [src]="image?.url">
                 <div class="overlay">
-                    <mat-icon [ngClass]="selectedFavourite === image ? 'added' : ''">favorite</mat-icon>
+                    <mat-icon [ngClass]="selectedFavourite === image?.url ? 'added' : ''">favorite</mat-icon>
                 </div>
             </div>
-
         </div>
         <!-- <div class="alert alert-dark" *ngIf="isLoading$ | async">
             Fetching tweets...

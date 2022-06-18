@@ -1,7 +1,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-4 single-image" *ngFor="let image of images; let i = index;">
-            <img class="img-fluid" (click)="view(image)" [src]="image">
+            <img class="img-fluid" (click)="viewPhoto(image)" [src]="image?.url">
+        </div>
+        <div class="full-col d-flex justify-content-center margin-top-25" *ngIf="!images?.length">
+           <p>You don't have any favourite photos.</p>
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { IPhoto } from 'src/app/interfaces/i-photo';
 
 @Component({
   selector: 'app-favourites',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./favourites.component.scss']
 })
 export class FavouritesComponent implements OnInit {
-  public images: any[] = [];
+  public images: IPhoto[] = [];
   constructor(private router: Router) { }
 
   ngOnInit(): void {
@@ -19,11 +20,9 @@ export class FavouritesComponent implements OnInit {
     this.images = JSON.parse(favouritesStorage);
   }
 
-
-
-  view(image: string) {
-    let splitUrl: any[] = image.split('/');
-    let imageID: string = splitUrl[4];
+  viewPhoto(image: IPhoto) {
+    let imageID: string = image.id;
     this.router.navigate(['/photos/' + imageID]);
   }
+
 }

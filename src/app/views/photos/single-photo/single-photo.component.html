@@ -1,1 +1,16 @@
-<p>single-photo works!</p>
+<div class="container-fluid" *ngIf="!isLoading">
+    <div class="row">
+        <div class="single-image full-col">
+            <img class="img-fluid" [src]="photo?.download_url">
+        </div>
+        <div class="full-col justify-content-center d-flex">
+            <button mat-raised-button color="warn" class="remove-button" (click)="removeFromFavourites()">
+                <mat-icon>close</mat-icon>
+                Remove from favourites
+            </button>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-center initial-spinner">
+    <mat-spinner [diameter]="50" *ngIf="isLoading"></mat-spinner>
+</div>
