@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IPhoto } from 'src/app/interfaces/i-photo';
+import { LocalStorageService } from 'src/app/services/localstorage.service';
 
 @Component({
   selector: 'app-favourites',
@@ -9,15 +10,14 @@ import { IPhoto } from 'src/app/interfaces/i-photo';
 })
 export class FavouritesComponent implements OnInit {
   public images: IPhoto[] = [];
-  constructor(private router: Router) { }
+  constructor(private router: Router, private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
     this.fetchFavourites();
   }
 
   fetchFavourites() {
-    const favouritesStorage: any = localStorage.getItem('favourites');
-    this.images = JSON.parse(favouritesStorage);
+    this.images = this.localStorageService.fetchFavouritesStorage();
   }
 
   viewPhoto(image: IPhoto) {

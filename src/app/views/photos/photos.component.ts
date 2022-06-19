@@ -1,22 +1,21 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IPhoto } from 'src/app/interfaces/i-photo';
-import { PhotosService } from 'src/app/services/photos.service';
+import { LocalStorageService } from 'src/app/services/localstorage.service';
 
 @Component({
   selector: 'app-photos',
   templateUrl: './photos.component.html',
   styleUrls: ['./photos.component.scss']
 })
-export class PhotosComponent implements OnInit, OnDestroy {
+export class PhotosComponent implements OnInit {
+  @ViewChild('anchor') public anchor!: ElementRef<HTMLElement>;
   public images: IPhoto[] = [];
   public isLoading: boolean = false;
+  public isFetchingMore: boolean = false;
   public selectedFavourite: string = '';
-  @ViewChild('anchor')
-  anchor!: ElementRef<HTMLElement>;
-  options = {};
+  public options = {};
 
-  constructor(private photosService: PhotosService, private http: HttpClient) { }
+  constructor(private localStorageService: LocalStorageService) { }
 
   toggleLoading() {
     console.log(this.isLoading);
@@ -24,8 +23,12 @@ export class PhotosComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    setTimeout(this.toggleLoading.bind(this), 1500);
+    setTimeout(this.toggleLoading.bind(this), 1000);
     this.fetchPhotos();
+  }
+
+  trackByFn(index: number) {
+    return index;
   }
 
   addToFavourites(photo: IPhoto) {
@@ -33,23 +36,24 @@ export class PhotosComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.selectedFavourite = '';
     }, 1500);
-
-    let favouritesStorage: any = localStorage.getItem('favourites');
     let favouritesArray: IPhoto[] = [];
-    if (JSON.parse(favouritesStorage)) {
-      favouritesArray = JSON.parse(favouritesStorage);
+    if (this.localStorageService.fetchFavouritesStorage()) {
+      favouritesArray = this.localStorageService.fetchFavouritesStorage();
     }
     favouritesArray.push(photo);
-    localStorage.setItem('favourites', JSON.stringify(favouritesArray));
-
+    this.updateFavouritesStorage(favouritesArray);
   }
 
-  trackByFn(index: number) {
-    return index;
+  updateFavouritesStorage(favourites: IPhoto[]) {
+    this.localStorageService.setFavouritesStorage(favourites);
   }
 
   onScroll(e: any) {
-    this.fetchPhotos();
+    this.isFetchingMore = true;
+    setTimeout(() => {
+      this.fetchPhotos();
+      this.isFetchingMore = false;
+    }, this.randomMS());
   }
 
   fetchPhotos() {
@@ -62,12 +66,13 @@ export class PhotosComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-
-  }
-
   retrieveID(image: string) {
     let splitUrl: any[] = image.split('/');
     return splitUrl[4];
   }
+
+  randomMS() {
+    return Math.floor((Math.random() * 100) + 300);
+  }
+
 }

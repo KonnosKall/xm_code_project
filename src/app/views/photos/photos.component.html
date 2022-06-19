@@ -1,5 +1,4 @@
-<div class="container-fluid" *ngIf="isLoading">
-
+<div class="container-fluid photo-wrapper" *ngIf="isLoading && images.length">
     <infinite-scroll (scrolled)="onScroll($event)">
         <div class="col-4 single-image" *ngFor="let image of images; let i = index; trackBy: trackByFn">
             <div class="box-wrapper" (click)="addToFavourites(image)">
@@ -9,9 +8,11 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="alert alert-dark" *ngIf="isLoading$ | async">
-            Fetching tweets...
-        </div> -->
+        <div class="d-flex justify-content-center full-col">
+            <div class="photo-loader" *ngIf="isFetchingMore">
+                <p>Fetching more photos...</p>
+            </div>
+        </div>
     </infinite-scroll>
 </div>
 <div class="d-flex justify-content-center initial-spinner">

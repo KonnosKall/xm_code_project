@@ -8,15 +8,12 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
 }
 .container-fluid {
     width: 100%;
-    // padding-right: 15px;
-    // padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -25,11 +22,9 @@ body {
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    // margin-right: -15px;
-    // margin-left: -15px;
     box-sizing: border-box;
 }
-.full-col{
+.full-col {
     box-sizing: border-box;
     -ms-flex: 0 0 100%;
     flex: 0 0 100%;
@@ -49,25 +44,32 @@ body {
     padding-right: 15px;
     padding-left: 15px;
 }
-.margin-top-25{
-    margin-top:25px;
+.margin-top-25 {
+    margin-top: 25px;
 }
 .img-fluid {
     max-width: 100%;
     height: auto;
 }
+.nav-button {
+    width: 150px;
+    height: 50px;
+    opacity: 0.8;
+    font-weight: 400;
+}
+.is-active {
+    opacity: 1;
+    font-weight: 500;
+}
+.photo-wrapper {
+    margin-bottom: 100px;
+}
 .single-image {
     margin: 15px 0;
     cursor: pointer;
-    .box-wrapper{
-
+    .box-wrapper {
         display: flex;
         position: relative;
-        // img {
-        //     object-fit: cover;
-        //     object-position: center;
-        //     aspect-ratio: 1 / 1;
-        // }
         .overlay {
             top: 0;
             left: 0;
@@ -84,29 +86,38 @@ body {
                 font-size: 50px;
                 height: 50px;
                 width: 50px;
-                color:#fff;
+                color: #fff;
                 transform: scale(1);
-                transition:0.3s;
-                opacity:1;
+                transition: 0.3s;
+                opacity: 1;
             }
-            .added{
+            .added {
                 transform: scale(1.2);
-                opacity:0;
+                opacity: 0;
             }
         }
         .overlay:hover {
             opacity: 1;
         }
     }
-
 }
 .d-flex {
     display: flex;
 }
-
 .justify-content-center {
     justify-content: center;
 }
 .initial-spinner {
     margin-top: 25px;
+}
+.photo-loader {
+    margin: 20px 0;
+    border-radius: 10px;
+    background-color: #3f51b5;
+    padding: 25px 25px;
+    color: #fff;
+    font-size: 20px;
+    p {
+        margin: 0 0 0 0;
+    }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IPicsumImage } from 'src/app/interfaces/i-image';
 import { IPhoto } from 'src/app/interfaces/i-photo';
+import { LocalStorageService } from 'src/app/services/localstorage.service';
 import { PhotosService } from 'src/app/services/photos.service';
 
 @Component({
@@ -13,7 +14,12 @@ export class SinglePhotoComponent implements OnInit {
   public photoID!: string | null;
   public photo!: IPicsumImage;
   public isLoading: boolean = false;
-  constructor(private route: ActivatedRoute, private photoService: PhotosService, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private photoService: PhotosService,
+    private router: Router,
+    private localStorageService: LocalStorageService
+  ) { }
 
   ngOnInit(): void {
     this.initSinglePhoto();
@@ -49,8 +55,7 @@ export class SinglePhotoComponent implements OnInit {
   }
 
   checkFavouriteStorage() {
-    const favouriteStorage: any = localStorage.getItem('favourites');
-    const favourites: IPhoto[] = JSON.parse(favouriteStorage);
+    const favourites: IPhoto[] = this.localStorageService.fetchFavouritesStorage();
     const foundFavouriteIndex: number = favourites.findIndex(favourite => favourite.id === this.photoID);
     if (foundFavouriteIndex > -1) {
       favourites.splice(foundFavouriteIndex, 1);
@@ -60,10 +65,10 @@ export class SinglePhotoComponent implements OnInit {
   }
 
   storeUpdatedFavourites(updatedFavourites: IPhoto[]) {
-    localStorage.setItem('favourites', JSON.stringify(updatedFavourites));
+    this.localStorageService.setFavouritesStorage(updatedFavourites);
   }
 
-  returnToFavourites(){
+  returnToFavourites() {
     this.router.navigate(['favourites']);
   }
 

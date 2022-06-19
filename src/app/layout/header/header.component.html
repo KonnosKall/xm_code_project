@@ -1,18 +1,9 @@
 <mat-grid-list cols="2" rowHeight="100px">
     <mat-grid-tile>
-        <button mat-raised-button routerLinkActive #photosButton="routerLinkActive"
-            [ngClass]="{'is-active' : photosButton.isActive}" color="primary" class="nav-button"
-            [routerLink]="['photos']">
-            <mat-icon>photo_camera</mat-icon>
-            Photos
-        </button>
+        <app-nav-button [label]="'Photos'" [icon]="'photo_camera'" [route]="'photos'"></app-nav-button>
     </mat-grid-tile>
     <mat-grid-tile>
-        <button mat-raised-button routerLinkActive #favouritesButton="routerLinkActive" color="primary"
-            class="nav-button" [ngClass]="{'is-active' : favouritesButton.isActive }" [routerLink]="['favourites']">
-            <mat-icon>favorite</mat-icon>
-            Favourites
-        </button>
+        <app-nav-button [label]="'Favourites'" [icon]="'favorite'" [route]="'favourites'"></app-nav-button>
     </mat-grid-tile>
 </mat-grid-list>
 <mat-divider></mat-divider>

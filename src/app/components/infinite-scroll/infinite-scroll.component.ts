@@ -6,42 +6,32 @@ import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, Input, 
     styleUrls: ['./infinite-scroll.component.scss']
 })
 export class InfiniteScrollComponent implements OnInit, OnDestroy, AfterViewInit {
-    @Input() options = {};
     @Output() scrolled = new EventEmitter();
     @ViewChild('anchorCheck')
-    anchorCheck!: ElementRef<HTMLElement>;
-
+    public anchorCheck!: ElementRef<HTMLElement>;
     private observer!: IntersectionObserver;
 
-    constructor(private host: ElementRef) { }
-    ngAfterViewInit() {
-        this.observer.observe(this.anchorCheck.nativeElement);
-    }
-
-    get element() {
-        return this.host.nativeElement;
-    }
+    constructor() { }
 
     ngOnInit() {
-        const options = {
-            root: this.isHostScrollable() ? this.host.nativeElement : null,
-            ...this.options
-        };
-
-        this.observer = new IntersectionObserver(([entry]) => {
-            entry.isIntersecting && this.scrolled.emit();
-        }, options);
-
+        this.initObserver();
     }
 
-    private isHostScrollable() {
-        const style = window.getComputedStyle(this.element);
-        return style.getPropertyValue('overflow') === 'auto' ||
-            style.getPropertyValue('overflow-y') === 'scroll';
+    ngAfterViewInit() {
+        this.observer.observe(this.anchorCheck.nativeElement);
     }
 
     ngOnDestroy() {
         this.observer.disconnect();
     }
 
+    initObserver() {
+        const options = {
+            root: null,
+            rootMargin: "0px"
+        };
+        this.observer = new IntersectionObserver(([entry]) => {
+            entry.isIntersecting && this.scrolled.emit();
+        }, options);
+    }
 }

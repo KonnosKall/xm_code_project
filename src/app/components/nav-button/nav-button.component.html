@@ -1,0 +1,5 @@
+<button mat-raised-button routerLinkActive #navButton="routerLinkActive"
+    [ngClass]="{'is-active' : navButton.isActive}" color="primary" class="nav-button" [routerLink]="[route]">
+    <mat-icon>{{icon}}</mat-icon>
+    {{label}}
+</button>

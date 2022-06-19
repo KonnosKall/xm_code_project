@@ -3,11 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { PhotosRoutingModule } from './photos-routing.module';
 import { PhotosComponent } from './photos.component';
-import { MatGridListModule } from '@angular/material/grid-list';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { InfiniteScrollComponent } from 'src/app/components/infinite-scroll.component';
-import { MatIconModule } from '@angular/material/icon';
-
+import { InfiniteScrollComponent } from 'src/app/components/infinite-scroll/infinite-scroll.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import { MaterialBasicModule } from 'src/app/shared/material-basic/material-basic.module';
 @NgModule({
   declarations: [
     PhotosComponent,
@@ -16,9 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     CommonModule,
     PhotosRoutingModule,
-    MatGridListModule,
-    MatProgressSpinnerModule,
-    MatIconModule
+    ScrollingModule,
+    MaterialBasicModule
   ]
 })
 export class PhotosModule { }
