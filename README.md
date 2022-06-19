@@ -2,6 +2,15 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
 
+## Overview
+
+This task involves creating an Angular webpage using the provided design wireframe.
+The task needs to be completed following the specifications as closely as possible. Best practices for every language should be adhered to and the development process should resemble how you would develop in an actual work environment (using TDD, committing to VCS, etc).
+You can always ask for guidance or details to be specified.
+## Task description
+
+Create a photo library that includes an infinite random photostream, with the ability to save photos to your “Favorites” library.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
@@ -14,14 +23,4 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
